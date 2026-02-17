@@ -1,4 +1,5 @@
 import express from 'express';
+import { matchRouter } from './routes/matches.js';
 
 const app = express();
 
@@ -9,6 +10,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.send('Welcome to the Sportz Server!');
 });
+
+app.use("/matches",matchRouter);
 
 // Listen on port 8000
 const port = 8000;
