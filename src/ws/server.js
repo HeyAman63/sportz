@@ -4,7 +4,11 @@ import {WebSocket, WebSocketServer} from 'ws'
 const sendJson=(socket,payload)=>{
     if(socket.readyState!==WebSocket.OPEN) return;
 
-    socket.send(JSON.stringify(payload));
+    try {
+        socket.send(JSON.stringify(payload));
+    } catch (err) {
+        console.error('Failed to send WebSocket message:', err);
+    }
 }
 
 const broadcast= (wss,payload)=>{
