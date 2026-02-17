@@ -22,8 +22,8 @@ export const createMatchSchema = z
     sport:     z.string().min(1, 'sport is required'),
     homeTeam:  z.string().min(1, 'homeTeam is required'),
     awayTeam:  z.string().min(1, 'awayTeam is required'),
-    startTime: z.iso.datetime({ message: 'startTime must be a valid ISO datetime string' }),
-    endTime:   z.iso.datetime({ message: 'endTime must be a valid ISO datetime string' }),
+    startTime: z.iso.datetime({ error: 'startTime must be a valid ISO datetime string' }),
+    endTime:   z.iso.datetime({ error: 'endTime must be a valid ISO datetime string' }),
     homeScore: z.coerce.number().int().nonnegative().optional(),
     awayScore: z.coerce.number().int().nonnegative().optional(),
   })
@@ -33,7 +33,7 @@ export const createMatchSchema = z
 
     if (end <= start) {
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         path: ['endTime'],
         message: 'endTime must be after startTime',
       });

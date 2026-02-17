@@ -51,6 +51,7 @@ matchRouter.post("/", async(req,res)=>{
 
         res.status(201).json({data:event})
     } catch (error) {
-        res.status(500).json({error:"Error in creating match",details:error.message})
+        console.error("Error in creating match:", error);
+        res.status(500).json({error:"Error in creating match"});
     }
 })
